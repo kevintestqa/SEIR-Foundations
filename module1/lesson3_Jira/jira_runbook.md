@@ -36,6 +36,15 @@ Your `.env` already contains your Slack settings. **Merge — do not replace.**
 > **Do NOT run `cp jira.env.example .env`** — that overwrites the file and erases your Slack webhook. This exact mistake broke Slack for half of last cohort. Chewbacca remembers.
 
 1. On EC2, change into the directory containing `jira.py` and `.env`.
+
+         [ec2-user@ip-172-31-40-45 balerica-bank]$ pwd
+         /opt/balerica-bank
+         [ec2-user@ip-172-31-40-45 balerica-bank]$ ls
+         agents  app  cobol  data  incident.py  jira.py  logs  slack.py  swift  venv
+         [ec2-user@ip-172-31-40-45 balerica-bank]$ ls -a
+         .  ..  .env  .gitignore  agents  app  cobol  data  incident.py  jira.py  logs  slack.py  swift  venv
+         [ec2-user@ip-172-31-40-45 balerica-bank]$ 
+
 2. Open the existing file: `nano .env` (or `vi .env`).
 3. Add these lines at the bottom, keeping every existing Slack line untouched:
 
@@ -67,6 +76,15 @@ Your `.env` already contains your Slack settings. **Merge — do not replace.**
 **Success check:** Both `grep` counts are correct. If the Slack count is 0, restore your Slack settings before continuing.
 
 ## Step 3 — Verify connectivity (creates nothing)
+
+From the directory containing slack.py, activate your existing project virtual environment if one is available. Otherwise create one:
+
+         python3 -m venv .venv
+         source .venv/bin/activate
+
+Install the dependencies
+
+         python -m pip install requests python-dotenv
 
 From the directory containing `jira.py` and `.env`, with your virtual environment active:
 
